@@ -1,0 +1,24 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /ljw
+spring:
+ datasource:
+  driver-class-name: com.mysql.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/ragnarok?useUnicode=true&characterEncoding=utf8&useSSL=false
+  username: root
+  password: ll99801404
+ http:
+  encoding:
+   force-request: true
+   enabled: true
+   charset: UTF-8
+ mvc:
+  static-path-pattern: /**
+ thymeleaf:
+  mode: HTML5
+  encoding: UTF-8
+  cache: false
+mybatis:
+  mapper-locations: classpath:com/ljw/springboot/thymeleaf/mapping/*.xml
+  type-aliases-package: com.ljw.springboot.thymeleaf.mapper
