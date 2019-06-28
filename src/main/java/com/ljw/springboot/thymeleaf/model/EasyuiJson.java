@@ -1,8 +1,9 @@
 package com.ljw.springboot.thymeleaf.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class EasyuiJson {
+public class EasyuiJson implements Serializable {
     private int total;
     private List rows;
 

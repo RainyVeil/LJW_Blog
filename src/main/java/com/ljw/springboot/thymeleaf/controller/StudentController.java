@@ -4,6 +4,9 @@ import com.ljw.springboot.thymeleaf.model.EasyuiJson;
 import com.ljw.springboot.thymeleaf.model.Student;
 import com.ljw.springboot.thymeleaf.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +19,9 @@ import java.util.List;
 public class StudentController {
     @Autowired
     StudentService studentService;
+    @Autowired
+    private RedisTemplate<Object,Object> redistemp;
+    RedisSerializer redisSerializer = new StringRedisSerializer();
 
     @RequestMapping("/index")
     public String indexpage(Model model){
@@ -52,12 +58,13 @@ public class StudentController {
             HashMap data = new HashMap();
             /*System.out.println("sId is:" + student.getsId());
             System.out.println("sName is:" + student.getsName());*/
-            
+
             int num = studentService.insertStudent(student);
 
             if(num==1){
                 data.put("success","true");
                 data.put("succmsg","保存成功！");
+                redistemp.delete("allStudents");
             }else{
                 data.put("success","false");
                 data.put("succmsg","保存失败！");
@@ -69,7 +76,12 @@ public class StudentController {
     @ResponseBody
     @RequestMapping("/getStudentGrid")
     public EasyuiJson getStudentGrid(Model model){
-        List students = studentService.queryallstudent();
+        redistemp.setKeySerializer(redisSerializer);
+        List students = (List<Student>) redistemp.opsForValue().get("allStudents");
+        if(null == students || 0 == students.size()){
+            students = studentService.queryallstudent();
+            redistemp.opsForValue().set("allStudents",students);
+        }
         return new EasyuiJson(students.size(),students);
     }
 }

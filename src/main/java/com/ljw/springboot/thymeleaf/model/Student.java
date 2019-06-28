@@ -1,6 +1,8 @@
 package com.ljw.springboot.thymeleaf.model;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable{
     private Integer sId;
 
     private String sName;

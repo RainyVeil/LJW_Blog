@@ -7,7 +7,7 @@ spring:
   driver-class-name: com.mysql.jdbc.Driver
   url: jdbc:mysql://localhost:3306/ragnarok?useUnicode=true&characterEncoding=utf8&useSSL=false
   username: root
-  password: ll99801404
+  password: 123456
  http:
   encoding:
    force-request: true
@@ -19,6 +19,10 @@ spring:
   mode: HTML5
   encoding: UTF-8
   cache: false
+ redis:
+  host: localhost
+  port: 6379
+  password: 123456
 mybatis:
   mapper-locations: classpath:com/ljw/springboot/thymeleaf/mapping/*.xml
   type-aliases-package: com.ljw.springboot.thymeleaf.mapper
