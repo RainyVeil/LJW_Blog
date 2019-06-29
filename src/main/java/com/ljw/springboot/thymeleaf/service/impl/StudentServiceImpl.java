@@ -18,4 +18,6 @@ public class StudentServiceImpl implements StudentService {
     public int insertStudent(Student student) {
         return studentMapper.insertStudent(student);
     }
+    public int editStudent(Student student) { return studentMapper.updateByPrimaryKeySelective(student); }
+    public int deleteStudent(Student student) { return studentMapper.deleteByPrimaryKey(student.getsId()); }
 }
