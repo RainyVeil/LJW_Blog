@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Bootstrap 模板</title>
+    <meta charset="UTF-8">
+    <!-- 引入 Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/ljw/bootstrap/css/bootstrap.min.css">
+
+    <!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
+    <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+    <script th:src="@{/jquery/jquery-3.2.1.min.js}"></script>
+    <!-- 包括所有已编译的插件 -->
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+</head>
+<body>s
+<div class="container">
+    <div class="row" >
+
+        <div class="col-xs-4 col-sm-4"
+             style="box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+        <h3 class="text-center">Bootstrap 字体图标(Glyphicons)</h3>
+        <p class="lead">什么是字体图标？
+            字体图标是在 Web 项目中使用的图标字体。虽然，Glyphicons Halflings 需要商业许可，但是您可以通过基于项目的 Bootstrap 来免费使用这些图标。
+            为了表示对图标作者的感谢，希望您在使用时加上 GLYPHICONS 网站的链接。</p>
+            <p>
+                <button type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-sort-by-attributes"></span>
+                </button>
+                <button type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                </button>
+                <button type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-sort-by-order"></span>
+                </button>
+                <button type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-sort-by-order-alt"></span>
+                </button>
+            </p>
+            <button type="button" class="btn btn-default btn-lg">
+                <span class="glyphicon glyphicon-user"></span> User
+            </button>
+            <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-user"></span> User
+            </button>
+            <button type="button" class="btn btn-default btn-xs">
+                <span class="glyphicon glyphicon-user"></span> User
+            </button>
+
+        </div>
+
+
+
+
+        <div class="col-xs-4 col-sm-4"
+             style="box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+
+            <h3 class="text-center">Bootstrap 下拉菜单（Dropdowns）</h3>
+
+            <div class="dropdown">
+                <button type="button" class="btn dropdown-toggle" id="dropdownMenu1"
+                        data-toggle="dropdown">
+                    主题
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="#">Java</a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="#">数据挖掘</a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="#">数据通信/网络</a>
+                    </li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="#">分离的链接</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-xs-4 col-sm-4"
+             style="box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+            <h3>Bootstrap 按钮组</h3>
+
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default">按钮 1</button>
+                    <button type="button" class="btn btn-default">按钮 2</button>
+                    <button type="button" class="btn btn-default">按钮 3</button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default">按钮 4</button>
+                    <button type="button" class="btn btn-default">按钮 5</button>
+                    <button type="button" class="btn btn-default">按钮 6</button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default">按钮 7</button>
+                    <button type="button" class="btn btn-default">按钮 8</button>
+                    <button type="button" class="btn btn-default">按钮 9</button>
+                </div>
+            </div>
+            <h4>嵌套</h4>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">按钮 1</button>
+                <button type="button" class="btn btn-default">按钮 2</button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        下拉
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">下拉链接 1</a></li>
+                        <li><a href="#">下拉链接 2</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <!--第二排-->
+            <div class="row" >
+                <div class="col-xs-4 col-sm-4"
+                     style="box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+                    <h3>Bootstrap 按钮下拉菜单</h3>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">默认
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">功能</a>
+                            </li>
+                            <li>
+                                <a href="#">另一个功能</a>
+                            </li>
+                            <li>
+                                <a href="#">其他</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">分离的链接</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary">原始</button>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">切换下拉菜单</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">功能</a></li>
+                            <li><a href="#">另一个功能</a></li>
+                            <li><a href="#">其他</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">分离的链接</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+                <div class="col-xs-4 col-sm-4"
+                     style="box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+                    <h3>Bootstrap 输入框组</h3>
+                    <div style="padding: 100px 100px 10px;">
+                        <form class="bs-example bs-example-form" role="form">
+                            <div class="input-group">
+                                <span class="input-group-addon">@</span>
+                                <input type="text" class="form-control" placeholder="twitterhandle">
+                            </div>
+                            <br>
+                            <div class="input-group">
+                                <input type="text" class="form-control">
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                            <br>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" class="form-control">
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-xs-4 col-sm-4"
+                     style="box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+                    <h3>Bootstrap 分页</h3>
+                    <ul class="pagination">
+                        <li><a href="#">&laquo;</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li class="disabled"><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+                    <ul class="pager">
+                        <li class="previous"><a href="#">&larr; Older</a></li>
+                        <li class="next"><a href="#">Newer &rarr;</a></li>
+                    </ul>
+
+                    <ul class="pager">
+                        <li class="previous disabled"><a href="#">&larr; Older</a></li>
+                        <li class="next"><a href="#">Newer &rarr;</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="row" >
+        <div class="col-xs-4 col-sm-4"
+             style="box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+            <div class="row">
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img th:src="@{/pic/7c1ed21b0ef41bd5ea8d552c57da81cb38db3d0f.jpg}"
+                             alt="通用的占位符缩略图">
+                        <div class="caption">
+                            <h3>缩略图标签</h3>
+                            <p>一些示例文本。一些示例文本。</p>
+                            <p>
+                                <a href="#" class="btn btn-primary" role="button">
+                                    按钮
+                                </a>
+                                <a href="#" class="btn btn-default" role="button">
+                                    按钮
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img th:src="@{/pic/7c1ed21b0ef41bd5ea8d552c57da81cb38db3d0f.jpg}"
+                             alt="通用的占位符缩略图">
+                        <div class="caption">
+                            <h3>缩略图标签</h3>
+                            <p>一些示例文本。一些示例文本。</p>
+                            <p>
+                                <a href="#" class="btn btn-primary" role="button">
+                                    按钮
+                                </a>
+                                <a href="#" class="btn btn-default" role="button">
+                                    按钮
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img th:src="@{/pic/7c1ed21b0ef41bd5ea8d552c57da81cb38db3d0f.jpg}"
+                             alt="通用的占位符缩略图">
+                        <div class="caption">
+                            <h3>缩略图标签</h3>
+                            <p>一些示例文本。一些示例文本。</p>
+                            <p>
+                                <a href="#" class="btn btn-primary" role="button">
+                                    按钮
+                                </a>
+                                <a href="#" class="btn btn-default" role="button">
+                                    按钮
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img th:src="@{/pic/7c1ed21b0ef41bd5ea8d552c57da81cb38db3d0f.jpg}"
+                             alt="通用的占位符缩略图">
+                        <div class="caption">
+                            <h3>缩略图标签</h3>
+                            <p>一些示例文本。一些示例文本。</p>
+                            <p>
+                                <a href="#" class="btn btn-primary" role="button">
+                                    按钮
+                                </a>
+                                <a href="#" class="btn btn-default" role="button">
+                                    按钮
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-xs-4 col-sm-4"
+             style="box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+        </div>
+        <div class="col-xs-4 col-sm-4"
+             style="box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+        </div>
+
+
+    </div>
+
+
+
+
+</div>
+
+
+
+</body>
+</html>

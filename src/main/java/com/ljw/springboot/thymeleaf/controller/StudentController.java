@@ -29,6 +29,14 @@ public class StudentController {
         model.addAttribute("msg","学生默认页面！");
         return "index";
     }
+    @RequestMapping("/about")
+    public String aboutpage(Model model){
+        model.addAttribute("msg","关于我");
+        return "about";
+    }
+
+
+
     @RequestMapping("/showStudent")
     public String show(Model model){
         model.addAttribute("msg","展示页面！");
