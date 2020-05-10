@@ -27,39 +27,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <div class="wrapper">
 
 
-<!--
-<div class="modal fade" id="userAdmin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4   id="myModalLabel"   >登录</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
-            </div>
-            <div class="modal-body">
-                <form role="form" id="loginForm" >
-                    <div class="form-group">
-                        <label for="userid">账号</label>
-                        <input type="text" class="form-control" id="userid" name="userid"  minlength="6" maxlength="20" placeholder="请输入账号">
-                    </div>
-                    <div class="form-group">
-                        <label for="userPass">密码</label>
-                        <input type="password" class="form-control" id="userPass" name="userPass" placeholder="请输入密码">
-                    </div>
-                </form>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" id="usercloseBtn" data-dismiss="modal">关闭</button>
-                <button type="Lbutton" id="userLoginBtn" class="btn btn-primary">登录</button>
-            </div>
-        </div>&lt;!&ndash; /.modal-content &ndash;&gt;
-    </div>&lt;!&ndash; /.modal &ndash;&gt;
-</div>
-
--->
-
-
     <div class="modal fade" id="userAdmin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
         <div class="row">
@@ -67,7 +34,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="col-md-4 m-auto" >
         <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">上传</h3>
+            <h3 id="h1" class="card-title">上传</h3>
+            <h3 id="h2" class="card-title"   >编辑</h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
@@ -81,40 +49,50 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <div class="form-group">
                     <label>标题</label>
-                    <input type="text" id="title_name" class="form-control" placeholder="请输入标题">
-                    <input type="text" id="title_id" hidden="hidden" >
+                    <input type="text" th:value="${article.titlename}" id="title_name" class="form-control" placeholder="请输入标题">
                 </div>
+
+                <div class="form-group" id="div_aId">
+                    <label>文章Id</label>
+                    <input type="text" id="aId" th:value="${article.aId}" class="form-control" readonly="true" >
+                </div>
+
 
                 <!-- select -->
                 <div class="form-group">
-                    <label>文章类型</label>
-                    <select class="form-control" id="type_id" >
+                    <label>类型</label>
+                    <select th:value="${article.typeId}" class="form-control" id="type_id" >
                         <option value="1" >游戏</option>
                         <option value="2" >学习</option>
                         <option value="3" >生活</option>
                     </select>
                 </div>
-
+                <!-- select -->
+                <div class="form-group" id="div_status">
+                    <label>状态</label>
+                    <select th:value="${article.status}" class="form-control" id="status" >
+                        <option value="0" >初始</option>
+                        <option value="1" >发布</option>
+                        <option value="2" >已删除</option>
+                    </select>
+                </div>
 
             </div>
 
         </form>
             <div class="card-footer">
                 <button type="button" class="btn btn-primary" id="submitBtn" >提交</button>
+                <button type="button" class="btn btn-primary" id="editBtn"  >修改</button>
             </div>
     </div>
         </div>
         </div>
-    </div>
 
+    </div>
 
     <textarea id="detail"></textarea>
 
-
-
-
 </div>
-
 
 <!-- jQuery -->
 <script src="/ljw/background/plugins/jquery/jquery.min.js"></script>
@@ -131,6 +109,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script>
     var simplemde = null;
     $(function() {
+        $("#div_aId").hide();
+        $("#div_status").hide();
+
+        $("#h2").hide();
+        $("#editBtn").hide();
+
+
         //初始化SimpleMDE
          simplemde = new SimpleMDE({
             autosave: {
@@ -176,8 +161,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             "type_id":$("#type_id").val()
     };
 
-
-
              $.ajax({
                 url: "/ljw/blog/editorSave",
                 async:false,
@@ -193,6 +176,51 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 }
             });
     });
+    $("#editBtn").click(function () {
+
+        var content = simplemde.value();
+        var formData = {
+            "content": content,
+            "title_name":$("#title_name").val(),
+            "aId":$("#aId").val(),
+            "type_id":$("#type_id").val(),
+            "status":$("#status").val()
+
+        };
+
+        $.ajax({
+            url: "/ljw/blog/editSave",
+            async:false,
+            type: 'post',
+            data: formData,
+            dataType:'json',
+            success: function (data) {
+                if(data.success == "true"){
+                    window.location.href="/ljw/blog/adminPage";
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+    });
+
 </script>
+<script th:inline="javascript">
+    $(function() {
+        var article = [[${article}]];
+        if(article.aId == null || (article.aId == "")) return;
+        simplemde.value(article.content);
+        $("#h2").show();
+        $("#editBtn").show();
+
+        $("#div_aId").show();
+        $("#div_status").show();
+
+        $("#submitBtn").hide();
+        $("#h1").hide();
+
+    });
+</script>
+
 </body>
 </html>

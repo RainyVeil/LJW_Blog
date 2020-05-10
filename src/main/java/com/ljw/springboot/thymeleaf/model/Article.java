@@ -12,7 +12,7 @@ public class Article {
     private String titlename;
 
     private Date createdate;
-
+    private Date editdate;
     private Date deletedate;
 
     private Integer accountId;
@@ -111,5 +111,13 @@ public class Article {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Date getEditdate() {
+        return editdate;
+    }
+
+    public void setEditdate(Date editdate) {
+        this.editdate = editdate;
     }
 }

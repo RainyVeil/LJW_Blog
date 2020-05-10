@@ -19,247 +19,299 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!--markdown-->
-<link rel="stylesheet" href="/ljw/markdown/dist/simplemde.min.css">
+  <link rel="stylesheet" href="/ljw/markdown/dist/simplemde.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="/ljw/background/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+
+
+    <style type="text/css">
+      .table {
+        table-layout:auto;
+      }
+      .table td{
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+      }
+      .table td:hover {
+        overflow: auto;
+        white-space: pre-wrap;
+      }
+        .blogsbox { width: 80%; overflow: hidden; float: left }
+        .blogs { overflow: hidden; margin-bottom: 20px; padding: 20px; background: #FFF; -webkit-box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1); -moz-box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1); box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1); -webkit-transition: all 0.6s ease; -moz-transition: all 0.6s ease; -o-transition: all 0.6s ease; transition: all 0.6s ease; }
+        .blogs .blogpic { float: left; width: 30%; max-height: 170px; margin-right: 20px; display: block; overflow: hidden; }
+        .blogs .blogpic img { width: 100%; height: auto; -webkit-transition: all 0.6s ease; -moz-transition: all 0.6s ease; -o-transition: all 0.6s ease; transition: all 0.6s ease; margin-bottom: 10px }
+        .blogs .blogpic :hover img { transform: scale(1.1) }
+        .blogs .blogtitle { margin: 0 0 10px 0; font-size: 20px; overflow: hidden; }
+        .blogs .blogtitle a:hover { color: #337ab7; }
+        .blogs .blogtext { font-size: 14px; color: #566573; overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 3; margin-top: 20px }
+        /*bplist*/
+        .bplist { width: 100%; overflow: hidden; display: block; margin-bottom: 20px }
+        .bplist li { float: left; width: 32.8%; height: 174px; overflow: hidden; }
+        .bplist li:nth-child(2) { margin-left: 6px }
+        .bplist li:last-child { float: right }
+        .bplist li img { width: auto; min-width: 100%; height: 174px; -webkit-transition: all 0.6s ease; -moz-transition: all 0.6s ease; -o-transition: all 0.6s ease; -ms-transition: all 0.6s ease; transition: all 0.6s ease; }
+        .bplist li:hover img { transform: scale(1.1) }
+        .bloginfo { overflow: hidden; margin-top: 30px }
+        .bloginfo ul li { float: left; font-size: 12px; padding: 0 0 0 20px; margin: 0 15px 0 0; color: #748594; line-height: 1.5; display: inline-block; }
+        .bloginfo ul li a { color: #748594; }
+        .bloginfo ul li a:hover { color: #000 }
+        .bloginfo .author { background: url(/ljw/blog/images/auicon.jpg) no-repeat 0 0 }
+        .bloginfo .lmname { background: url(/ljw/blog/images/auicon.jpg) no-repeat top -23px left; }
+        .bloginfo .timer { background: url(/ljw/blog/images/auicon.jpg) no-repeat top -44px left; }
+        .bloginfo .view { background: url(/ljw/blog/images/auicon.jpg) no-repeat top -64px left; }
+        .bloginfo .like { background: url(/ljw/blog/images/auicon.jpg) no-repeat top -85px left; }
+    </style>
 
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
 
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
-    </ul>
+<div class="modal fade" id="publishDiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-4 m-auto" >
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 id="h1" class="card-title">上传</h3>
+        </div>
+        <!-- /.card-header -->
 
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
+        <div class="card-body">
+          <div class="form-group">
+              <div id="style1"  class="blogsbox">
+                  <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
+                      <h3 class="blogtitle"><a href="#" id="titlename1" target="_blank">标题1</a></h3>
+                      <span class="bplist">
+                <a href="/" title="">
+              <li><img id="pic1" src="images/avatar.jpg" alt=""></li>
+              <li><img id="pic2" src="images/bi05.jpg" alt=""></li>
+              <li><img id="pic3" src="images/banner01.jpg" alt=""></li>
+              </a></span>
+                      <p class="blogtext" id="brief_intro1"  >简介1</p>
+                      <div  class="bloginfo">
+                          <ul>
+                              <li id="lmname1" class="lmname"><a href="/">-</a></li>
+                              <li id="timer1" class="timer">2020-01-01</li>
+                              <li id="view1" class="view"><span>34567</span>已阅读</li>
+                              <li id="like1" class="like">9999</li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div id="style2"  class="blogsbox">
+                  <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
+                      <h3 class="blogtitle"><a href="#" id="titlename2" target="_blank">标题2</a></h3>
+                      <span class="blogpic"><a href="/" title=""><img id="pic4" src="images/toppic01.jpg" alt=""></a></span>
+                      <p class="blogtext"  id="brief_intro2"  >简介2</p>
+                      <div  class="bloginfo">
+                          <ul>
+                              <li id="lmname2" class="lmname"><a href="/">-</a></li>
+                              <li id="timer2" class="timer">2020-01-01</li>
+                              <li id="view2" class="view"><span>34567</span>已阅读</li>
+                              <li id="like2" class="like">9999</li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div id="style3"  class="blogsbox">
+                  <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
+                      <h3 class="blogtitle"><a href="#" id="titlename3" target="_blank">标题3</a></h3>
+                      <p class="blogtext"  id="brief_intro3"  >简介3</p>
+                      <div  class="bloginfo">
+                          <ul>
+                              <li id="lmname3" class="lmname"><a href="/">-</a></li>
+                              <li id="timer3" class="timer">2020-01-01</li>
+                              <li id="view3" class="view"><span>34567</span>已阅读</li>
+                              <li id="like3" class="like">9999</li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+
+          <!-- form start -->
+        <form role="form" id="uploadform">
+          <div class="card-body">
+
+              <!-- select -->
+              <div class="form-group">
+                  <label>Select</label>
+                  <select class="form-control" selected="1" id="styleid" onchange="selectstyle(this.options[this.options.selectedIndex].value)"  >
+                      <option value="1" >样式1(3张图片)</option>
+                      <option value="2" >样式2(1张图片)</option>
+                      <option value="3" >样式3(无图片)</option>
+                  </select>
+              </div>
+
+              <div class="form-group" id="picinput1">
+            <label for="filename1">上传图片</label>
+            <div class="input-group">
+              <div class="custom-file">
+                <input style="cursor:pointer" type="file" class="custom-file-input" accept="image/png, image/jpeg, image/jpg" name="fileName1"  id="filename1" onchange="checkSubmit(1)" >
+                <label class="custom-file-label" for="filename1">选择图片(左)</label>
+              </div>
+            </div>
+            <div class="input-group">
+              <div class="custom-file">
+                <input style="cursor:pointer" type="file" class="custom-file-input" accept="image/png, image/jpeg, image/jpg" name="fileName2"  id="filename2" onchange="checkSubmit(2)" >
+                <label class="custom-file-label" for="filename2">选择图片(中)</label>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <div class="custom-file">
+                <input style="cursor:pointer" type="file" class="custom-file-input" accept="image/png, image/jpeg, image/jpg" name="fileName3"  id="filename3" onchange="checkSubmit(3)" >
+                <label class="custom-file-label" for="filename3">选择图片(右)</label>
+              </div>
+            </div>
+
+          </div>
+            <div class="form-group" id="picinput2">
+              <label for="filename4">上传图片</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input style="cursor:pointer" type="file" class="custom-file-input" accept="image/png, image/jpeg, image/jpg" name="fileName4"  id="filename4" onchange="checkSubmit(4)" >
+                  <label class="custom-file-label" for="filename1">选择图片</label>
+                </div>
+              </div>
+            </div>
+
+
+              <!-- textarea -->
+              <div class="form-group">
+                  <label>简介</label>
+                  <textarea class="form-control" rows="3" id="new_brief_intro" placeholder="Enter ..."></textarea>
+              </div>
+
+          </div>
+        </form>
+        <!-- <form action="/ljw/blog/imageUpload" method="post" enctype="multipart/form-data">
+           <input type="file" name="fileName" id="filename" accept="image/png, image/jpeg, image/jpg" onchange="checkImage()">
+           <input type="button" id="submitBtn" onclick="checkSubmit()" value="上传"/>
+         </form>-->
+
+
+        <div id="onLoadImage"></div>
+          <div class="card-footer">
+          <button type="button" class="btn btn-primary" id="publishBtn" >提交</button>
         </div>
       </div>
-    </form>
+    </div>
+  </div>
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="/ljw/background/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Brad Diesel
-                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="/ljw/background/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  John Pierce
-                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">I got your message bro</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="/ljw/background/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nora Silvester
-                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">The subject goes here</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-        </div>
-      </li>
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i
-            class="fas fa-th-large"></i></a>
-      </li>
-    </ul>
-  </nav>
+
+</div>
+
+<div class="wrapper">
+
+
+<!--  Navbar-->
+
+  <div th:insert="background/frame.html :: Navbar"></div>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="/ljw/background/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="/ljw/background/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block"><p th:text="${#session.getAttribute('USER_SESSION').userid}">message</p></a>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Starter Pages
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
-              </li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-edit"></i>
-                  <p>
-                    Forms
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="/ljw/background/pages/forms/general.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>General Elements</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="/ljw/background/pages/forms/advanced.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Advanced Elements</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="/ljw/background/pages/forms/editors.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Editors</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="/ljw/background/pages/forms/validation.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Validation</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
 
 
+  <div th:insert="background/frame.html :: Sidebar"></div>
 
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-
-
       <button type="button" id="write" class="btn btn-primary"> 新文章</button>
 
-  </div>
-  <!-- /.content-wrapper -->
 
+  <!-- /.content-wrapper -->
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table style="table-layout:fixed;" id="example1" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>文章ID</th>
+                <th>标题</th>
+                <th >内容</th>
+                <th>类型</th>
+                <th>阅读次数</th>
+                <th>收藏次数</th>
+                <th>文章状态</th>
+                <th>创建者ID</th>
+                <th >创建时间</th>
+                <th>最后编辑时间</th>
+                <th>删除时间</th>
+                <th>编辑</th>
+                <th>发布</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="article : ${articles}">
+                <td th:text="${article.aId}">-</td>
+                <td th:text="${article.titlename}">-</td>
+                <td th:text="${article.content}">-</td>
+
+
+                <td th:switch="${article.typeId}">
+                  <p th:case="1" >游戏</p>
+                  <p th:case="2" >学习</p>
+                  <p th:case="3" >生活</p>
+                </td>
+
+                <td th:text="${article.readtimes}">-</td>
+                <td th:text="${article.collecttimes}">-</td>
+                <td th:switch="${article.status}">
+                  <p th:case="0" >初始</p>
+                  <p th:case="1" >发布</p>
+                  <p th:case="2" >删除</p>
+                </td>
+                <td th:text="${article.accountId}">-</td>
+                <td th:text="${#dates.format(article.createdate,'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${#dates.format(article.editdate,'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${#dates.format(article.deletedate,'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td><button type="button" class="btn btn-block  btn-primary" th:onclick="'javascript:updateArticle('+${article.aId}+')'"  >编辑</button></td>
+                <td><button data-target="#publishDiv" data-toggle="modal" type="button" class="btn btn-block btn-success" th:onclick="'javascript:publishArticle('+${article.aId}+')'"  >发布</button></td>
+
+              </tr>
+              </tbody>
+
+             <!-- <div th:switch="${user.role}">
+                <p th:case="'admin'">用户是管理员</p>
+                <p th:case="'manager'">用户是经理</p>
+                <p th:case="*">用户是别的玩意</p>
+              </div>
+    -->
+     <!--      <tfoot>
+              <tr>
+                <th>Rendering engine</th>
+                <th>Browser</th>
+                <th>Platform(s)</th>
+                <th>Engine version</th>
+                <th>CSS grade</th>
+              </tr>
+              </tfoot>-->
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+
+
+
+</div>
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -289,7 +341,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
 <!--<script src="/ljw/jquery/jquery-3.2.1.min.js"></script>-->
 <!-- jQuery -->
-
 <script src="/ljw/background/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="/ljw/background/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -300,13 +351,237 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="/ljw/markdown/dist/simplemde.min.js"></script>
 
 
+<!-- DataTables -->
+<script src="/ljw/background/plugins/datatables/jquery.dataTables.js"></script>
+<script src="/ljw/background/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/ljw/background/dist/js/demo.js"></script>
+<!-- page script -->
 
 <script>
+
+    var publishAid = 0;
+    $(function () {
+        $("#example1").DataTable();
+        $("#style2").hide();
+        $("#style3").hide();
+        $("#picinput2").hide();
+        $("#blog1").attr("class","nav-link active");
+    });
+    function selectstyle(value){
+
+        $("#style1").hide();
+        $("#style2").hide();
+        $("#style3").hide();
+        $("#picinput1").hide();
+        $("#picinput2").hide();
+        $("#style"+value).show();
+        if(value == 1){
+            $("#picinput1").show();
+        }
+        if(value == 2){
+            $("#picinput2").show();
+        }
+    }
+
 
     $("#write").click(function(){
         window.location.href="/ljw/blog/editor";
     });
-</script>
 
+
+    function updateArticle(aid){
+        window.location.href="/ljw/blog/edit/"+aid;
+    }
+
+    //点击发布按钮显示预览
+    function publishArticle(aid){
+        publishAid = aid;
+        $.ajax({
+            async: false,
+            type: 'POST',
+            url: "/ljw/blog/setInfo",
+            dataType: 'json',
+            data: {"aid":aid},
+            success: function (data) {
+                if(data.success == "true"){
+                    var article = data.articleInfo;
+                    for(var i =1; i <= 3; i++){
+                        $("#brief_intro"+i).html(article.brief_intro);
+                        $("#titlename"+i).html(article.titlename);
+                        $("#lmname"+i).html(article.typename);
+                        $("#timer"+i).html(article.datetime);
+                        $("#view"+i).html(article.readtimes);
+                        $("#like"+i).html(article.collecttimes);
+                    }
+                    $("#pic1").attr('src',article.picture1);
+                    $("#pic2").attr('src',article.picture2);
+                    $("#pic3").attr('src',article.picture3);
+                    $("#pic4").attr('src',article.picture4);
+
+                    $("#new_brief_intro").html(article.brief_intro);
+                    if(article.display_type == null || article.display_type == ""){
+                        $("#styleid").val(1);
+                        selectstyle(1);
+                    }else{
+                        $("#styleid").val(article.display_type);
+                        selectstyle(article.display_type);
+                    }
+                }
+                else {
+                    alert("失败");
+                }
+                //alert(data.result_msg);
+            },
+            error: function (e) {
+                alert("error");
+            }
+        })
+    }
+    //检查图片
+    function checkImage() {
+        var fileName=$("#filename").val();
+        fileName=fileName.replace("C:\\fakepath\\","");
+        var flag=true;
+        if(fileName==""){
+            flag=false;
+            alert("请选择图片");
+        }
+        else{
+            var size = $("#filename")[0].files[0].size;
+            if(size/1000>1000){
+                flag=false;
+                alert("图片大小不能超过1MB");
+            }
+        }
+        if(flag){
+            onLoadImage();
+        }
+        else{//清除input type=file的显示内容
+            $("#filename").val("");
+        }
+        return flag;
+    }
+
+    //预览图片
+    function onLoadImage() {
+        var file=$('#filename').get(0).files[0];
+        if(file.size/1000>1000){
+            alert("图片大小不能超过1MB");
+            return;
+        }
+        var reader = new FileReader();
+        //将文件以Data URL形式读入页面
+        reader.readAsDataURL(file);
+        //reader.function(e)
+        reader.onload = (function(file) {
+            return function (e) {
+                $("#pic1").attr('src',this.result);
+/*
+                $("#onLoadImage").html('<img src="' + this.result + '" alt="" />');
+*/
+            }
+        })
+
+    }
+
+    /*上传图片
+   详细参考链接：https://www.cnblogs.com/qiumingcheng/p/6854933.html
+   1.processData设置为false。因为data值是FormData对象，不需要对数据做处理。
+   2.<form>标签添加enctype="multipart/form-data"属性。
+   3.cache设置为false，上传文件不需要缓存。
+   4.contentType设置为false，不设置contentType值，因为是由<form>表单构造的FormData对象，且已经声明了属性enctype="multipart/form-data"，所以这里设置为false。
+   */
+    function checkSubmit(flag) {
+        var formdata=new FormData();
+        formdata.append('fileName',$('#filename'+flag).get(0).files[0]);
+        $.ajax({
+            async: false,
+            type: 'POST',
+            url: "/ljw/blog/imageUpload",
+            dataType: 'json',
+            data: formdata,
+            contentType:false,//ajax上传图片需要添加
+            processData:false,//ajax上传图片需要添加
+            success: function (data) {
+                if(data.hasOwnProperty("relativePath")){
+
+                    $("#pic"+flag).attr('src',data.relativePath);
+
+                }
+                else {
+                    alert("上传失败");
+                }
+                //alert(data.result_msg);
+            },
+            error: function (e) {
+                alert("error");
+            }
+        })
+    }
+    //发布文章
+    $("#publishBtn").click(function () {
+
+        var formData = new FormData();
+        formData.append("styleid", $("#styleid").val());
+        formData.append("brief_intro", $("#new_brief_intro").val());
+        formData.append("publishAid", publishAid);
+
+        var styleid = $("#styleid").val();
+
+        if(styleid == 1){
+            var file1 =  $('#filename1').get(0).files[0];
+            var file2 =  $('#filename2').get(0).files[0];
+            var file3 =  $('#filename3').get(0).files[0];
+            if(file1 == null || file2 == null || file3 == null){
+                alert("请先上传图片");
+                return;
+            }
+            formData.append('filename1', file1);
+            formData.append('filename2', file2);
+            formData.append('filename3', file3);
+            formData.append('filename4', null);
+        }else if(styleid == 2){
+            var file4 =  $('#filename4').get(0).files[0];
+            if(file4 == null){
+                alert("请先上传图片");
+                return;
+            }
+            formData.append('filename1', null);
+            formData.append('filename2', null);
+            formData.append('filename3', null);
+            formData.append('filename4', file4);
+        }else {
+            formData.append('filename1', null);
+            formData.append('filename2', null);
+            formData.append('filename3', null);
+            formData.append('filename4', null);
+        }
+
+
+        $.ajax({
+            async: false,
+            type: 'POST',
+            url: "/ljw/blog/publish",
+            dataType: 'json',
+            data: formData,
+            contentType:false,//ajax上传图片需要添加
+            processData:false,//ajax上传图片需要添加
+            success: function (data) {
+                if(data.success == "true"){
+                    alert("发布成功！");
+                    window.location.href="/ljw/blog/adminPage";
+                }
+                else {
+                    alert(data.errorMessage);
+                }
+                //alert(data.result_msg);
+            },
+            error: function (e) {
+                alert("error");
+            }
+        })
+    });
+</script>
 </body>
 </html>

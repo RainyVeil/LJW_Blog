@@ -10,7 +10,8 @@ public class WebConfig implements WebMvcConfigurer {
         InterceptorRegistration registration = registry.addInterceptor(new LoginInterceptor());
         //拦截的路径
         String[] addPathPatterns = {
-                "/blog/adminPage"
+                "/blog/adminPage",
+                "/blog/articlepush"
         };
         //不拦截的路径
         String[] excludePathPatterns = {

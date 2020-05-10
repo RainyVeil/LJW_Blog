@@ -1,65 +1,56 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>LJW_Blog_demo</title>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>LJW_Blog_demo</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- 引入 Bootstrap -->
-  <link rel="stylesheet" type="text/css" href="/ljw/bootstrap/css/bootstrap.css">
+    <!-- 引入 Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/ljw/bootstrap/css/bootstrap.css">
 
-  <!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
-  <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-  <![endif]-->
-  <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
-  <script th:src="@{/jquery/jquery-3.2.1.min.js}"></script>
-  <!-- 包括所有已编译的插件 -->
-  <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+    <!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
+    <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+    <script th:src="@{/jquery/jquery-3.2.1.min.js}"></script>
+    <!-- 包括所有已编译的插件 -->
+    <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
 
+    <link rel="stylesheet" type="text/css" href="/ljw/blog/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/ljw/blog/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/ljw/blog/css/m.css">
 
-
-  <link rel="stylesheet" type="text/css" href="/ljw/blog/css/base.css">
-  <link rel="stylesheet" type="text/css" href="/ljw/blog/css/index.css">
-  <link rel="stylesheet" type="text/css" href="/ljw/blog/css/m.css">
-
-  <!--<script th:src="@{/blog/js/jquery.min.js}"></script>-->
-  <script th:src="@{/blog/js/jquery.easyfader.min.js}"></script>
-  <script th:src="@{/blog/js/scrollReveal.js}"></script>
-  <script th:src="@{/blog/js/common.js}"></script>
-  <!--[if lt IE 9]>
-  <script th:src="@{/blog/js/modernizr.js}"></script>
-  <![endif]-->
+    <script th:src="@{/blog/js/jquery.easyfader.min.js}"></script>
+    <script th:src="@{/blog/js/scrollReveal.js}"></script>
+    <script th:src="@{/blog/js/common.js}"></script>
+    <!--[if lt IE 9]>
+    <script th:src="@{/blog/js/modernizr.js}"></script>
+    <![endif]-->
 </head>
 <body>
 <script type="text/javascript">
     $(function() {
-
         $("#usercloseBtn").click(function() {
             window.location.reload();
         });
         $("#userLoginBtn").click(function(){
             console.log("ajax >>>begin");
             var data = $("#loginForm").serialize();
-            //alert(data);
-/*
-                        url: "/ljw/blog/userLogin/"+$("#userid").val()+"/"+$("#userPass").val(),
-            */
-
-           $.ajax({
-                url: "/ljw/blog/userLogin",
-                async:false,
-                type: 'post',
-                data: data,
-                dataType:'json',
-               success: function (data) {
-                    if(data.success == "true"){
-                      window.location.href="/ljw/blog/adminPage";
-                    }else{
+            $.ajax({
+                url: "/ljw/blog/userLogin",//发送请求的地址，默认当前地址
+                async:false,//是否发送异步请求默认true
+                type: 'post',//请求方式 默认get
+                data: data,//发送到服务器的数据
+                dataType:'json',//预期服务器返回的数据类型
+                success: function (data) {//请求成功后调用的回调函数
+                    if(data.success == "true"){//登录成功 进如管理员界面
+                        window.location.href="/ljw/blog/adminPage";
+                    }else{//登录失败返回失败信息
                         alert(data.msg);
                     }
                 }
@@ -74,486 +65,269 @@
 
 </script>
 
-<header> 
-  <!--menu begin-->
-  <div class="menu">
-    <nav class="nav" id="topnav">
-      <h1 class="logo"><a href="http://www.yangqq.com">博客</a></h1>
-      <li><a href="/ljw/blog/index">网站首页</a> </li>
-      <li><a href="/ljw/blog/about">关于我</a> </li>
- <!--     <li><a href="list.html">学无止境</a>
-        <ul class="sub-nav">
-          <li><a href="list.html">心得笔记</a></li>
-          <li><a href="list.html">CSS3|Html5</a></li>
-          <li><a href="list.html">网站建设</a></li>
-          <li><a href="list.html">推荐工具</a></li>
-          <li><a href="list.html">JS实例索引</a></li>
-        </ul>
-      </li>-->
-      <li><a href="/ljw/blog/life">慢生活</a>
-       <!-- <ul class="sub-nav">
-          <li><a href="life.html">日记</a></li>
-          <li><a href="life.html">欣赏</a></li>
-          <li><a href="life.html">程序人生</a></li>
-          <li><a href="life.html">经典语录</a></li>
-        </ul>-->
-      </li>
-      <li><a href="/ljw/blog/info">内容页</a> </li>
-      <button id="btn_admin1" type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#userAdmin" style="float: right;margin-top: 18px" >
-      <span class="glyphicon glyphicon-user"></span> User
-    </button>
-    </nav>
-  </div>
-  <div class="modal fade" id="userAdmin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="myModalLabel">登录</h4>
-        </div>
-        <div class="modal-body">
-            <form role="form" id="loginForm" >
-                <div class="form-group">
-                    <label for="userid">账号</label>
-                    <input type="text" class="form-control" id="userid" name="userid"  minlength="6" maxlength="20" placeholder="请输入账号">
+<header>
+    <!--menu begin-->
+    <div class="menu">
+        <nav class="nav" id="topnav">
+            <h1 class="logo"><a href="#">博客</a></h1>
+            <li><a href="/ljw/blog/index">网站首页</a></li>
+            <li><a href="/ljw/blog/about">关于我</a></li>
+            <li><a href="/ljw/blog/branch/2">学无止境</a></li>
+            <li><a href="/ljw/blog/branch/1">游戏人生</a></li>
+            <li><a href="/ljw/blog/branch/3">慢生活</a></li>
+            <button id="btn_admin1" type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#userAdmin" style="float: right;margin-top: 18px" >
+                <span class="glyphicon glyphicon-user"></span> 登录
+            </button>
+        </nav>
+    </div>
+    <div class="modal fade" id="userAdmin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">登录</h4>
                 </div>
-                <div class="form-group">
-                    <label for="userPass">密码</label>
-                    <input type="password" class="form-control" id="userPass" name="userPass" placeholder="请输入密码">
+                <div class="modal-body">
+                    <form role="form" id="loginForm" >
+                        <div class="form-group">
+                            <label for="userid">账号</label>
+                            <input type="text" class="form-control" id="userid" name="userid"  minlength="6" maxlength="20" placeholder="请输入账号">
+                        </div>
+                        <div class="form-group">
+                            <label for="userPass">密码</label>
+                            <input type="password" class="form-control" id="userPass" name="userPass" placeholder="请输入密码">
+                        </div>
+                    </form>
                 </div>
-            </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="usercloseBtn" data-dismiss="modal">关闭</button>
+                    <button type="button" id="userLoginBtn" class="btn btn-primary">登录</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <!--menu end-->
 
-        </div>
-          <div class="modal-footer">
-          <button type="button" class="btn btn-default" id="usercloseBtn" data-dismiss="modal">关闭</button>
-          <button type="button" id="userLoginBtn" class="btn btn-primary">登录</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-  </div>
-  <!--menu end--> 
-  <!--mnav begin-->
-  <div id="mnav">
-    <h2><a href="#" class="mlogo">博客2</a><span class="navicon"></span></h2>
-    <dl class="list_dl">
-      <dt class="list_dt"> <a href="index.html">网站首页</a> </dt>
-      <dt class="list_dt"> <a href="about.html">关于我</a> </dt>
-      <dd class="list_dd">
-        <ul>
-          <li><a href="share.html">个人博客模板</a></li>
-          <li><a href="share.html">国外Html5模板</a></li>
-          <li><a href="share.html">企业网站模板</a></li>
-        </ul>
-      </dd>
-      <dt class="list_dt"> <a href="#">学无止境</a> </dt>
-      <dd class="list_dd">
-        <ul>
-          <li><a href="list.html">心得笔记</a></li>
-          <li><a href="list.html">CSS3|Html5</a></li>
-          <li><a href="list.html">网站建设</a></li>
-          <li><a href="list.html">推荐工具</a></li>
-          <li><a href="list.html">JS实例索引</a></li>
-        </ul>
-      </dd>
-      <dt class="list_dt"> <a href="#">慢生活</a> </dt>
-      <dd class="list_dd">
-        <ul>
-          <li><a href="life.html">日记</a></li>
-          <li><a href="life.html">欣赏</a></li>
-          <li><a href="life.html">程序人生</a></li>
-          <li><a href="life.html">经典语录</a></li>
-        </ul>
-      </dd>
-      <dt class="list_dt"> <a href="time.html">时间轴</a> </dt>
-      <dt class="list_dt"> <a href="gbook.html">留言</a> </dt>
-    </dl>
-  </div>
-  <!--mnav end--> 
+
+
+    <div id="mnav">
+        <h2><a href="#" class="mlogo">博客</a><span class="navicon"></span></h2>
+        <dl class="list_dl">
+            <dt class="list_dt"><a href="/ljw/blog/index">网站首页</a></dt>
+            <dt class="list_dt"><a href="/ljw/blog/about">关于我</a></dt>
+            <dt class="list_dt"><a href="/ljw/blog/branch/2">学无止境</a></dt>
+            <dt class="list_dt"><a href="/ljw/blog/branch/1">游戏人生</a></dt>
+            <dt class="list_dt"><a href="/ljw/blog/branch/3">慢生活</a></dt>
+        </dl>
+    </div>
 </header>
-<article> 
-  <!--banner begin-->
- <div class="picsbox"> 
-  <div class="banner">
-    <div id="banner" class="fader">
-      <li class="slide" ><a href="/" target="_blank"><img src="images/banner01.jpg"><span class="imginfo">别让这些闹心的套路，毁了你的网页设计!</span></a></li>
-      <li class="slide" ><a href="/" target="_blank"><img src="images/banner02.jpg"><span class="imginfo">网页中图片属性固定宽度，如何用js改变大小</span></a></li>
-      <li class="slide" ><a href="/" target="_blank"><img src="images/banner03.jpg"><span class="imginfo">个人博客，属于我的小世界！</span></a></li>
-      <div class="fader_controls">
-        <div class="page prev" data-target="prev">&lsaquo;</div>
-        <div class="page next" data-target="next">&rsaquo;</div>
-        <ul class="pager_list">
-        </ul>
-      </div>
+<article>
+    <!--banner begin-->
+    <div class="picsbox">
+        <div class="banner">
+            <div id="banner" class="fader">
+                <li class="slide" ><a href="https://weibo.com/u/2172410757" target="_blank"><img src="/ljw/pic/0003.jpg"><span class="imginfo">大触画师：@-小茄子萌萌哒- </span></a></li>
+                <li class="slide" ><a href="https://weibo.com/u/2172410757" target="_blank"><img src="/ljw/pic/0002.jpg"><span class="imginfo">大触画师：@-小茄子萌萌哒- </span></a></li>
+                <li class="slide" ><a href="https://weibo.com/u/2172410757" target="_blank"><img src="/ljw/pic/0001.jpg"><span class="imginfo">大触画师：@-小茄子萌萌哒- </span></a></li>
+                <div class="fader_controls">
+                    <div class="page prev" data-target="prev">&lsaquo;</div>
+                    <div class="page next" data-target="next">&rsaquo;</div>
+                    <ul class="pager_list">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--banner end-->
+        <div class="toppic">
+            <li> <a href="/ljw/blog/showContent/31" target="_blank">
+                <i><img src="/ljw/pic/0004.jpg"></i>
+                <h2>空洞骑士全成就路上3个很难的BOSS！</h2>
+                <span>游戏人生</span> </a> </li>
+
+
+            <li> <a href="/ljw/blog/about" target="_blank"> <i><img src="images/zd01.jpg"></i>
+                <h2>个人博客，属于我的小世界！</h2>
+                <span>自我介绍</span> </a> </li>
+        </div>
+
+
     </div>
-  </div>
-  <!--banner end-->
-  <div class="toppic">
-    <li> <a href="/" target="_blank"> <i><img src="images/toppic01.jpg"></i>
-      <h2>别让这些闹心的套路，毁了你的网页设计!</h2>
-      <span>学无止境</span> </a> </li>
-    <li> <a href="/" target="_blank"> <i><img src="images/zd01.jpg"></i>
-      <h2>个人博客，属于我的小世界！</h2>
-      <span>学无止境</span> </a> </li>
-  </div>
-  </div>
-  <div class="blank"></div>
-  <!--blogsbox begin-->
-  <div class="blogsbox">
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">别让这些闹心的套路，毁了你的网页设计!</a></h3>
-      <span class="blogpic"><a href="/" title=""><img src="images/toppic01.jpg" alt=""></a></span>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... </p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view"><span>34567</span>已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
+    <div   class="blogsbox">
+    <div th:each="article : ${topArticles}">
+            <div th:if="${article.display_type} == 1"   class="blogs" data-scroll-reveal="enter bottom over 1s" >
+                <h3 class="blogtitle"><a href="#"  th:href="@{'/blog/showContent/'+${article.a_id}}"   th:text="${article.titlename}" >标题1</a></h3>
+                <span class="bplist">
+                    <a th:href="@{'/blog/showContent/'+${article.a_id}}" title="">
+                      <li><img   th:src="${article.picture1}" alt=""></li>
+                      <li><img   th:src="${article.picture2}" alt=""></li>
+                      <li><img   th:src="${article.picture3}" alt=""></li>
+                      </a></span>
+                <p class="blogtext" th:text="${article.brief_intro}"   >简介1</p>
+                <div  class="bloginfo">
+                    <ul>
+                        <li class="lmname"><a href="/" th:text="${article.typename}"></a></li>
+                        <li class="timer" th:text="${article.datetime}" >-</li>
+                        <li class="view" th:text="${article.readtimes}" >-</li>
+                        <li class="like" th:text="${article.collecttimes}" >-</li>
+                    </ul>
+                </div>
+            </div>
+            <div th:if="${article.display_type} == 2"  class="blogs" data-scroll-reveal="enter bottom over 1s" >
+                <h3 class="blogtitle"><a href="#" th:href="@{'/blog/showContent/'+${article.a_id}}"   th:text="${article.titlename}" >标题2</a></h3>
+                <span class="blogpic"><a th:href="@{'/blog/showContent/'+${article.a_id}}" title=""><img   th:src="${article.picture4}" alt=""></a></span>
+                <p class="blogtext" th:text="${article.brief_intro}" >简介2</p>
+                <div  class="bloginfo"  >
+                    <ul>
+                        <li class="lmname"><a href="/" th:text="${article.typename}"></a></li>
+                        <li class="timer" th:text="${article.datetime}" >-</li>
+                        <li class="view" th:text="${article.readtimes}" >-</li>
+                        <li class="like" th:text="${article.collecttimes}" >-</li>
+                    </ul>
+                </div>
+            </div>
+        <div  th:if="${article.display_type} == 3" class="blogs" data-scroll-reveal="enter bottom over 1s" >
+            <h3 class="blogtitle"><a href="#" th:href="@{'/blog/showContent/'+${article.a_id}}"   th:text="${article.titlename}" >标题3</a></h3>
+            <p class="blogtext" th:text="${article.brief_intro}">简介3</p>
+            <div class="bloginfo" >
+                <ul>
+                    <li class="lmname"><a href="/" th:text="${article.typename}"></a></li>
+                    <li class="timer" th:text="${article.datetime}" >-</li>
+                    <li class="view" th:text="${article.readtimes}" >-</li>
+                    <li class="like" th:text="${article.collecttimes}" >-</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">帝国cms 首页或者列表页 实现图文不同样式调用方法</a></h3>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！...</p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view">4567已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
     </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">别让这些闹心的套路，毁了你的网页设计!</a></h3>
-      <span class="bplist"><a href="/" title="">
-      <li><img src="images/avatar.jpg" alt=""></li>
-      <li><img src="images/toppic02.jpg" alt=""></li>
-      <li><img src="images/banner01.jpg" alt=""></li>
-      </a></span>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... </p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view"><span>34567</span>已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
+  <!--              <div   class="blogsbox">
+                    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
+                        <h3 class="blogtitle"><a href="#"  target="_blank">标题3</a></h3>
+                        <p class="blogtext" th:fragment="brief_intro"   >简介3</p>
+                        <div  class="bloginfo">
+                            <ul>
+                                <li  class="lmname"><a href="/">-</a></li>
+                                <li  class="timer">2020-01-01</li>
+                                <li  class="view"><span>34567</span>已阅读</li>
+                                <li  class="like">9999</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>-->
+
+
+
+
+        <!--    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
+                <h3 class="blogtitle"><a href="/" target="_blank">别让这些闹心的套路，毁了你的网页设计!</a></h3>
+
+                <span class="bplist">
+                    <a href="/" title="">
+          <li><img src="images/avatar.jpg" alt=""></li>
+          <li><img src="images/bi05.jpg" alt=""></li>
+          <li><img src="images/banner01.jpg" alt=""></li>
+          </a></span>
+
+                <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... </p>
+
+                <div class="bloginfo">
+                    <ul>
+                        <li class="author"><a href="/">杨青</a></li>
+                        <li class="lmname"><a href="/">学无止境</a></li>
+                        <li class="timer">2018-5-13</li>
+                        <li class="view"><span>34567</span>已阅读</li>
+                        <li class="like">9999</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
+                <h3 class="blogtitle"><a href="/" target="_blank">帝国cms 首页或者列表页 实现图文不同样式调用方法</a></h3>
+
+
+                <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！...</p>
+                <div class="bloginfo">
+                    <ul>
+                        <li class="author"><a href="/">杨青</a></li>
+                        <li class="lmname"><a href="/">学无止境</a></li>
+                        <li class="timer">2018-5-13</li>
+                        <li class="view">4567已阅读</li>
+                        <li class="like">9999</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
+
+
+                <h3 class="blogtitle"><a href="/study/2/17.html" target="_blank" >Just One Last Dance</a></h3>
+
+                <span class="blogpic"><a href="/study/2/17.html" title="Just One Last Dance"><img src="http://www.yangqq.com/d/file/news/s/2013-07-09/89b36652d1f5ba23172c7ed3dc522d8b.jpg" alt="Just One Last Dance"></a></span>
+
+                <p class="blogtext">《Just One Last Dance 》是一个朋友介绍给我听的，当时一听就喜欢上它了，直到现在，就像《因为是女子》一样，我空间的主打歌还挺多的，唯独这两首让我舍不得换掉......如... </p>
+                <div class="bloginfo">
+                    <ul>
+                        <li class="author"></li>
+                        <li class="lmname"><a href="/study/2/"  target="_blank" >目录2</a></li>
+                        <li class="timer">2018-07-15</li>
+                        <li class="view"><span>32</span>已阅读</li>
+                        <li class="like">6</li>
+                    </ul>
+                </div>
+            </div>-->
+
+
+
     </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">别让这些闹心的套路，毁了你的网页设计!</a></h3>
-      <span class="bigpic"><a href="/" title=""><img src="images/toppic01.jpg" alt=""></a></span>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... </p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view"><span>34567</span>已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
+    <!--blogsbox end-->
+    <div class="sidebar">
+        <div class="zhuanti">
+            <h2 class="hometitle">特别推荐</h2>
+
+            <ul th:each="specPush : ${specPushArticles}"   >
+                <h4 th:text="${specPush.titlename}"></h4>
+                <li><i><img th:src="${specPush.pic}"></i>
+                    <p><span><a th:href="@{'/blog/showContent/'+${specPush.a_id}}">阅读</a></span></p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tuijian">
+            <h2 class="hometitle">推荐文章</h2>
+
+            <span th:each="push,stat : ${pushArticles}" >
+
+                <ul th:if="${stat.count} == 1" class="tjpic">
+                       <i><img th:src="${push.pic}"></i>
+                            <p ><a th:text="${push.titlename}" th:href="@{'/blog/showContent/'+${push.a_id}}" >-</a></p>
+                </ul>
+
+
+                <ul th:if="${stat.count} != 1"   class="sidenews">
+                        <li>
+                            <i th:if="${push.pic} != 'false'"><img th:src="${push.pic}"></i>
+                            <p ><a th:text="${push.titlename}" th:href="@{'/blog/showContent/'+${push.a_id}}">-</a></p>
+                            <span  th:text="${#dates.format(push.pushdate, 'yyyy-MM-dd')}" >2000-01-01</span>
+                        </li>
+                </ul>
+
+        </span>
+        </div>
+
+        <!--  <div class="guanzhu" id="follow-us">
+            <h2 class="hometitle">关注我们 么么哒！</h2>
+            <ul>
+              <li class="sina"><a href="/" target="_blank"><span>新浪微博</span>杨青博客</a></li>
+              <li class="tencent"><a href="/" target="_blank"><span>腾讯微博</span>杨青博客</a></li>
+              <li class="qq"><a href="/" target="_blank"><span>QQ号</span>476847113</a></li>
+              <li class="email"><a href="/" target="_blank"><span>邮箱帐号</span>dancesmiling@qq.com</a></li>
+              <li class="wxgzh"><a href="/" target="_blank"><span>微信号</span>yangqq_1987</a></li>
+              <li class="wx"><img src="images/wx.jpg"></li>
+            </ul>
+          </div>-->
     </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">别让这些闹心的套路，毁了你的网页设计!</a></h3>
-      <span class="blogpic"><a href="/" title=""><img src="images/toppic01.jpg" alt=""></a></span>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... </p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view"><span>34567</span>已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
-    </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">帝国cms 首页或者列表页 实现图文不同样式调用方法</a></h3>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！...</p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view">4567已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
-    </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">别让这些闹心的套路，毁了你的网页设计!</a></h3>
-      <span class="bplist"><a href="/" title="">
-      <li><img src="images/avatar.jpg" alt=""></li>
-      <li><img src="images/bi05.jpg" alt=""></li>
-      <li><img src="images/banner01.jpg" alt=""></li>
-      </a></span>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... </p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view"><span>34567</span>已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
-    </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">别让这些闹心的套路，毁了你的网页设计!</a></h3>
-      <span class="blogpic"><a href="/" title=""><img src="images/toppic01.jpg" alt=""></a></span>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... </p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view"><span>34567</span>已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
-    </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">帝国cms 首页或者列表页 实现图文不同样式调用方法</a></h3>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！...</p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view">4567已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
-    </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">别让这些闹心的套路，毁了你的网页设计!</a></h3>
-      <span class="bplist"><a href="/" title="">
-      <li><img src="images/avatar.jpg" alt=""></li>
-      <li><img src="images/toppic02.jpg" alt=""></li>
-      <li><img src="images/banner01.jpg" alt=""></li>
-      </a></span>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... </p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view"><span>34567</span>已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
-    </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">别让这些闹心的套路，毁了你的网页设计!</a></h3>
-      <span class="bigpic"><a href="/" title=""><img src="images/toppic01.jpg" alt=""></a></span>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... </p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view"><span>34567</span>已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
-    </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">别让这些闹心的套路，毁了你的网页设计!</a></h3>
-      <span class="blogpic"><a href="/" title=""><img src="images/toppic01.jpg" alt=""></a></span>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... </p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view"><span>34567</span>已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
-    </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">帝国cms 首页或者列表页 实现图文不同样式调用方法</a></h3>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！...</p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view">4567已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
-    </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">别让这些闹心的套路，毁了你的网页设计!</a></h3>
-      <span class="bplist"><a href="/" title="">
-      <li><img src="images/avatar.jpg" alt=""></li>
-      <li><img src="images/bi05.jpg" alt=""></li>
-      <li><img src="images/banner01.jpg" alt=""></li>
-      </a></span>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... </p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view"><span>34567</span>已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
-    </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">别让这些闹心的套路，毁了你的网页设计!</a></h3>
-      <span class="bigpic"><a href="/" title=""><img src="images/toppic01.jpg" alt=""></a></span>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... </p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view"><span>34567</span>已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
-    </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">帝国cms 首页或者列表页 实现图文不同样式调用方法</a></h3>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！...</p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view">4567已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
-    </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">别让这些闹心的套路，毁了你的网页设计!</a></h3>
-      <span class="bplist"><a href="/" title="">
-      <li><img src="images/avatar.jpg" alt=""></li>
-      <li><img src="images/bi05.jpg" alt=""></li>
-      <li><img src="images/banner01.jpg" alt=""></li>
-      </a></span>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... </p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view"><span>34567</span>已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
-    </div>
-    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
-      <h3 class="blogtitle"><a href="/" target="_blank">别让这些闹心的套路，毁了你的网页设计!</a></h3>
-      <span class="bigpic"><a href="/" title=""><img src="images/toppic01.jpg" alt=""></a></span>
-      <p class="blogtext">如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... </p>
-      <div class="bloginfo">
-        <ul>
-          <li class="author"><a href="/">杨青</a></li>
-          <li class="lmname"><a href="/">学无止境</a></li>
-          <li class="timer">2018-5-13</li>
-          <li class="view"><span>34567</span>已阅读</li>
-          <li class="like">9999</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <!--blogsbox end-->
-  <div class="sidebar">
-    <div class="zhuanti">
-      <h2 class="hometitle">特别推荐</h2>
-      <ul>
-        <li> <i><img src="images/banner03.jpg"></i>
-          <p>帝国cms调用方法 <span><a href="/">阅读</a></span> </p>
-        </li>
-        <li> <i><img src="images/b04.jpg"></i>
-          <p>5.20 我想对你说 <span><a href="/">阅读</a></span></p>
-        </li>
-        <li> <i><img src="images/b05.jpg"></i>
-          <p>个人博客，属于我的小世界！ <span><a href="/">阅读</a></span></p>
-        </li>
-      </ul>
-    </div>
-    <div class="tuijian">
-      <h2 class="hometitle">推荐文章</h2>
-      <ul class="tjpic">
-        <i><img src="images/toppic01.jpg"></i>
-        <p><a href="/">别让这些闹心的套路，毁了你的网页设计</a></p>
-      </ul>
-      <ul class="sidenews">
-        <li> <i><img src="images/toppic01.jpg"></i>
-          <p><a href="/">别让这些闹心的套路，毁了你的网页设计</a></p>
-          <span>2018-05-13</span> </li>
-        <li> <i><img src="images/toppic02.jpg"></i>
-          <p><a href="/">给我模板PSD源文件，我给你设计HTML！</a></p>
-          <span>2018-05-13</span> </li>
-        <li> <i><img src="images/v1.jpg"></i>
-          <p><a href="/">别让这些闹心的套路，毁了你的网页设计</a></p>
-          <span>2018-05-13</span> </li>
-        <li> <i><img src="images/v2.jpg"></i>
-          <p><a href="/">给我模板PSD源文件，我给你设计HTML！</a></p>
-          <span>2018-05-13</span> </li>
-      </ul>
-    </div>
-    <div class="tuijian">
-      <h2 class="hometitle">点击排行</h2>
-      <ul class="tjpic">
-        <i><img src="images/toppic01.jpg"></i>
-        <p><a href="/">别让这些闹心的套路，毁了你的网页设计</a></p>
-      </ul>
-      <ul class="sidenews">
-        <li> <i><img src="images/toppic01.jpg"></i>
-          <p><a href="/">别让这些闹心的套路</a></p>
-          <span>2018-05-13</span> </li>
-        <li> <i><img src="images/toppic02.jpg"></i>
-          <p><a href="/">给我模板PSD源文件，我给你设计HTML！</a></p>
-          <span>2018-05-13</span> </li>
-        <li> <i><img src="images/v1.jpg"></i>
-          <p><a href="/">别让这些闹心的套路，毁了你的网页设计</a></p>
-          <span>2018-05-13</span> </li>
-        <li> <i><img src="images/v2.jpg"></i>
-          <p><a href="/">给我模板PSD源文件，我给你设计HTML！</a></p>
-          <span>2018-05-13</span> </li>
-      </ul>
-    </div>
-    <div class="cloud">
-      <h2 class="hometitle">标签云</h2>
-      <ul>
-        <a href="/">陌上花开</a> <a href="/">校园生活</a> <a href="/">html5</a> <a href="/">SumSung</a> <a href="/">青春</a> <a href="/">温暖</a> <a href="/">阳光</a> <a href="/">三星</a><a href="/">索尼</a> <a href="/">华维荣耀</a> <a href="/">三星</a> <a href="/">索尼</a>
-      </ul>
-    </div>
-    <div class="links">
-      <h2 class="hometitle">友情链接</h2>
-      <ul>
-        <li><a href="http://www.yangqq.com" target="_blank">杨青博客</a></li>
-        <li><a href="http://www.yangqq.com" target="_blank">D设计师博客</a></li>
-        <li><a href="http://www.yangqq.com" target="_blank">优秀个人博客</a></li>
-      </ul>
-    </div>
-  <!--  <div class="guanzhu" id="follow-us">
-      <h2 class="hometitle">关注我们 么么哒！</h2>
-      <ul>
-        <li class="sina"><a href="/" target="_blank"><span>新浪微博</span>杨青博客</a></li>
-        <li class="tencent"><a href="/" target="_blank"><span>腾讯微博</span>杨青博客</a></li>
-        <li class="qq"><a href="/" target="_blank"><span>QQ号</span>476847113</a></li>
-        <li class="email"><a href="/" target="_blank"><span>邮箱帐号</span>dancesmiling@qq.com</a></li>
-        <li class="wxgzh"><a href="/" target="_blank"><span>微信号</span>yangqq_1987</a></li>
-        <li class="wx"><img src="images/wx.jpg"></li>
-      </ul>
-    </div>-->
-  </div>
 </article>
 <footer>
-  <p>Design by <a href="http://www.yangqq.com" target="_blank">杨青个人博客</a> <a href="/">蜀ICP备11002373号-1</a></p>
+    <p><a href="#" target="_blank">罗佳伟个人博客</a> <a href="/"></a></p>
 </footer>
 <a href="#" class="cd-top">Top</a>
 </body>

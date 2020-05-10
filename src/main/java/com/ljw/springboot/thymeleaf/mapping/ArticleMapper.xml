@@ -6,6 +6,7 @@
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="title_id" jdbcType="INTEGER" property="titleId" />
     <result column="titlename" jdbcType="VARCHAR" property="titlename" />
+    <result column="editdate" jdbcType="TIMESTAMP" property="editdate" />
     <result column="createdate" jdbcType="TIMESTAMP" property="createdate" />
     <result column="deletedate" jdbcType="TIMESTAMP" property="deletedate" />
     <result column="account_id" jdbcType="INTEGER" property="accountId" />
@@ -14,10 +15,150 @@
     <result column="collecttimes" jdbcType="INTEGER" property="collecttimes" />
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
+
+
+
   <sql id="Base_Column_List">
-    a_id, content, title_id, titlename, createdate, deletedate, account_id, type_id, 
+    a_id, content, title_id, titlename, createdate, editdate, deletedate, account_id, type_id,
     readtimes, collecttimes, status
   </sql>
+
+  <select id="selectByArticle" parameterType="com.ljw.springboot.thymeleaf.model.Article" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from article  where 1 = 1
+    <if test="aId != null and aId != ''">
+      and  a_id=#{aId,jdbcType=INTEGER}
+    </if>
+      order by a_id desc
+  </select>
+
+  <select id="selectArticleInfo" parameterType="java.lang.Integer" resultType="java.util.Map">
+     SELECT
+      a_id,
+      content,
+      a.title_id,
+      titlename,
+      createdate,
+      editdate,
+      deletedate,
+      account_id,
+      type_id as typeId,
+      readtimes,
+      collecttimes,
+      STATUS,
+      (SELECT
+              type.NAME
+          FROM
+              type
+          WHERE
+              type.type_id = a.type_id
+      ) AS typename,
+      DATE_FORMAT(createdate, '%Y-%m-%d') AS datetime,
+      IFNULL(b.brief_intro,CONCAT(SUBSTRING(a.content,1,20),'...')) as brief_intro,
+      b.display_type,
+      b.picture1,
+      b.picture2,
+      b.picture3,
+      b.picture4
+  FROM
+      article a
+  LEFT JOIN title b ON a.title_id = b.title_id
+  WHERE a.a_id=#{aId,jdbcType=INTEGER}
+  </select>
+  <select id="selectupdown" parameterType="java.util.Map" resultType="java.util.Map">
+    select a.a_id as upid,a.titlename as upname,b.a_id as downid,b.titlename as downname from
+    (select a_id,titlename from article where a_id = IFNULL((select a_id from article where a_id <![CDATA[ < ]]> #{aId,jdbcType=INTEGER} and type_id =  #{typeId,jdbcType=INTEGER} order by a_id desc limit 1),#{aId,jdbcType=INTEGER})) a,
+    (select a_id,titlename from article where a_id = IFNULL((select a_id from article where a_id <![CDATA[ > ]]> #{aId,jdbcType=INTEGER} and type_id =  #{typeId,jdbcType=INTEGER} order by a_id asc limit 1),#{aId,jdbcType=INTEGER})) b
+  </select>
+
+
+
+  <select id="selectTypeMessage" parameterType="java.lang.Integer"  resultType="java.util.Map">
+    SELECT
+    type_id as typeId,
+    name,
+    message
+    FROM
+    type
+    WHERE
+    type_id = #{typeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectTopArticle" parameterType="java.util.Map"  resultType="java.util.Map">
+    SELECT
+    a_id,
+    content,
+    a.title_id,
+    titlename,
+    createdate,
+    editdate,
+    deletedate,
+    account_id,
+    type_id,
+    readtimes,
+    collecttimes,
+    STATUS,
+    (SELECT
+    type.NAME
+    FROM
+    type
+    WHERE
+    type.type_id = a.type_id
+    ) AS typename,
+    DATE_FORMAT(createdate, '%Y-%m-%d') AS datetime,
+    IFNULL(b.brief_intro,CONCAT(SUBSTRING(a.content,1,20),'...')) as brief_intro,
+    b.display_type,
+    b.picture1,
+    b.picture2,
+    b.picture3,
+    b.picture4
+    FROM
+    article a
+    LEFT JOIN title b ON a.title_id = b.title_id
+    WHERE 1 = 1
+    and status = 1
+    <if test="typeId != null and typeId != ''">
+      and  a.type_id=#{typeId,jdbcType=INTEGER}
+    </if>
+    ORDER BY a.createdate desc
+  </select>
+  <select id="selectTopArticlePage" parameterType="java.util.Map"  resultType="java.util.Map">
+    SELECT
+    a_id,
+    a.title_id,
+    titlename,
+    createdate,
+    editdate,
+    deletedate,
+    account_id,
+    type_id,
+    readtimes,
+    collecttimes,
+    STATUS,
+    (SELECT
+    type.NAME
+    FROM
+    type
+    WHERE
+    type.type_id = a.type_id
+    ) AS typename,
+    DATE_FORMAT(createdate, '%Y-%m-%d') AS datetime,
+    IFNULL(b.brief_intro,CONCAT(SUBSTRING(a.content,1,20),'...')) as brief_intro,
+    b.display_type,
+    b.picture1,
+    b.picture2,
+    b.picture3,
+    b.picture4
+    FROM
+    article a
+    LEFT JOIN title b ON a.title_id = b.title_id
+    WHERE 1 = 1
+    <if test="typeId != null and typeId != ''">
+      and  a.type_id=#{typeId,jdbcType=INTEGER}
+    </if>
+    ORDER BY a.createdate desc
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -30,15 +171,17 @@
   </delete>
   <insert id="insert" parameterType="com.ljw.springboot.thymeleaf.model.Article">
     insert into article (a_id, content, title_id, 
-      titlename, createdate, deletedate, 
+      titlename, createdate,editdate, deletedate,
       account_id, type_id, readtimes, 
       collecttimes, status)
     values (#{aId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{titleId,jdbcType=INTEGER}, 
-      #{titlename,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{deletedate,jdbcType=TIMESTAMP}, 
+      #{titlename,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP},#{editdate,jdbcType=TIMESTAMP}, #{deletedate,jdbcType=TIMESTAMP},
       #{accountId,jdbcType=INTEGER}, #{typeId,jdbcType=CHAR}, #{readtimes,jdbcType=INTEGER}, 
       #{collecttimes,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})
   </insert>
+
   <insert id="insertSelective" parameterType="com.ljw.springboot.thymeleaf.model.Article">
+
     insert into article
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="aId != null">
@@ -55,6 +198,9 @@
       </if>
       <if test="createdate != null">
         createdate,
+      </if>
+      <if test="editdate != null">
+        editdate,
       </if>
       <if test="deletedate != null">
         deletedate,
@@ -91,6 +237,9 @@
       <if test="createdate != null">
         #{createdate,jdbcType=TIMESTAMP},
       </if>
+      <if test="deitdate != null">
+        #{editdate,jdbcType=TIMESTAMP},
+      </if>
       <if test="deletedate != null">
         #{deletedate,jdbcType=TIMESTAMP},
       </if>
@@ -126,6 +275,9 @@
       <if test="createdate != null">
         createdate = #{createdate,jdbcType=TIMESTAMP},
       </if>
+      <if test="editdate != null">
+        editdate = #{editdate,jdbcType=TIMESTAMP},
+      </if>
       <if test="deletedate != null">
         deletedate = #{deletedate,jdbcType=TIMESTAMP},
       </if>
@@ -153,6 +305,7 @@
       title_id = #{titleId,jdbcType=INTEGER},
       titlename = #{titlename,jdbcType=VARCHAR},
       createdate = #{createdate,jdbcType=TIMESTAMP},
+      editdate = #{editdate,jdbcType=TIMESTAMP},
       deletedate = #{deletedate,jdbcType=TIMESTAMP},
       account_id = #{accountId,jdbcType=INTEGER},
       type_id = #{typeId,jdbcType=CHAR},

@@ -1,13 +1,20 @@
 server:
   port: 80
   servlet:
-    context-path: /ljw
+   context-path: /ljw
+   session:
+     timeout: PT2H
 spring:
  datasource:
   driver-class-name: com.mysql.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf8&useSSL=false
-  username: root
-  password: '123456'
+  url: jdbc:mysql://47.108.30.112:3306/blog?useUnicode=true&characterEncoding=utf8&useSSL=false
+  username: ljw
+  password: 'll99801404'
+  hikari:
+   minimum-idle: 3
+   maximum-pool-size: 10
+   max-lifetime: 30000
+   connection-test-query: SELECT 1
  http:
   encoding:
    force-request: true
@@ -26,3 +33,12 @@ spring:
 mybatis:
   mapper-locations: classpath:com/ljw/springboot/thymeleaf/mapping/*.xml
   type-aliases-package: com.ljw.springboot.thymeleaf.mapper
+  # spring boot集成mybatis的方式打印sql
+  #configuration:
+   # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# pagehelper
+pagehelper:
+ helperDialect: mysql
+ reasonable: true
+ supportMethodsArguments: true
+ params: count=countSql

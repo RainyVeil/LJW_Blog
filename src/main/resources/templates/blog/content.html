@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+<title th:text="${article.typename}"></title>
+    <!-- 引入 Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/ljw/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/ljw/blog/css/base.css">
+  <link rel="stylesheet" type="text/css" href="/ljw/blog/css/index.css">
+  <link rel="stylesheet" type="text/css" href="/ljw/blog/css/m.css">
+  <link rel="stylesheet" href="/ljw/markdown/dist/simplemde.min.css">
+
+
+    <style type="text/css">
+        pre {
+            overflow:auto
+        }
+    </style>
+</head>
+<body>
+<header> 
+  <!--menu begin-->
+  <div class="menu">
+    <nav class="nav" id="topnav">
+      <h1 class="logo"><a href="#">博客</a></h1>
+      <li><a href="/ljw/blog/index">网站首页</a></li>
+      <li><a href="/ljw/blog/about">关于我</a></li>
+      <li><a href="/ljw/blog/branch/2">学无止境</a></li>
+      <li><a href="/ljw/blog/branch/1">游戏人生</a></li>
+      <li><a href="/ljw/blog/branch/3">慢生活</a></li>
+    </nav>
+  </div>
+
+
+    <div id="mnav">
+        <h2><a href="#" class="mlogo">博客</a><span class="navicon"></span></h2>
+        <dl class="list_dl">
+            <dt class="list_dt"><a href="/ljw/blog/index">网站首页</a></dt>
+            <dt class="list_dt"><a href="/ljw/blog/about">关于我</a></dt>
+            <dt class="list_dt"><a href="/ljw/blog/branch/2">学无止境</a></dt>
+            <dt class="list_dt"><a href="/ljw/blog/branch/1">游戏人生</a></dt>
+            <dt class="list_dt"><a href="/ljw/blog/branch/3">慢生活</a></dt>
+        </dl>
+    </div>
+</header>
+<article>
+  <h1 class="t_nav"><span>您现在的位置是：<a href="/ljw/blog/index">首页</a>&nbsp;>&nbsp;<a th:text="${article.typename}" th:href="'/ljw/blog/branch/'+${article.typeId}" >--</a></span><a href="/ljw/blog/index" class="n1">网站首页</a><a th:href="'/ljw/blog/branch/'+${article.typeId}" th:text="${article.typename}" class="n2">--</a></h1>
+  <main>
+    <div class="infosbox">
+      <div class="newsview">
+        <h3 th:text="${article.titlename}" class="news_title">文章标题</h3>
+        <div class="bloginfo">
+          <ul>
+            <li th:text="${article.typename}" class="lmname">慢生活</li>
+            <li th:text="${article.datetime}" class="timer">2018-07-15</li>
+            <li th:text="${article.readtimes}" class="view">2</li>
+            <li th:text="${article.collecttimes}" class="like">1</li>
+          </ul>
+        </div>
+        <div class="news_about"><strong>简介</strong><p th:text="${article.brief_intro}"></p></div>
+<!--
+        <div class="tags"><a href="/e/tags/?tagname=%C9%E8%BC%C6&tempid=9" target="_blank">标签</a></div>-->
+<!--<div class="news_about"><strong>简介</strong>简介</div>-->
+        <div class="news_con" id="contentDiv"></div>
+
+        <textarea id="detail" hidden="true"></textarea>
+
+      </div>
+      <div class="nextinfo">
+        <p>上一篇：<a th:href="'/ljw/blog/showContent/'+${updownPage.upid}" th:text="${updownPage.upname}" >--</a></p>
+        <p>下一篇：<a th:href="'/ljw/blog/showContent/'+${updownPage.downid}" th:text="${updownPage.downname}" >--</a></p>
+
+
+      </div>
+    </div>
+  </main>
+  <aside class="sidebar">
+      <div class="zhuanti">
+          <h2 class="hometitle">特别推荐</h2>
+          <ul th:each="specPush : ${specPushArticles}"   >
+              <h4 th:text="${specPush.titlename}"></h4>
+              <li><i><img th:src="${specPush.pic}"></i>
+                  <p><span><a th:href="@{'/blog/showContent/'+${specPush.a_id}}">阅读</a></span></p>
+              </li>
+          </ul>
+      </div>
+      <div class="tuijian">
+          <h2 class="hometitle">推荐文章</h2>
+          <span th:each="push,stat : ${pushArticles}" >
+                <ul th:if="${stat.count} == 1" class="tjpic">
+                       <i><img th:src="${push.pic}"></i>
+                            <p ><a th:text="${push.titlename}" th:href="@{'/blog/showContent/'+${push.a_id}}" >-</a></p>
+                </ul>
+                <ul th:if="${stat.count} != 1"   class="sidenews">
+                        <li>
+                            <i th:if="${push.pic} != 'false'"><img th:src="${push.pic}"></i>
+                            <p ><a th:text="${push.titlename}" th:href="@{'/blog/showContent/'+${push.a_id}}">-</a></p>
+                            <span  th:text="${#dates.format(push.pushdate, 'yyyy-MM-dd')}" >2000-01-01</span>
+                        </li>
+                </ul>
+        </span>
+      </div>
+   <div class="guanzhu">
+      <h2 class="hometitle">关注我</h2>
+      <ul>
+        <li class="qq"><a href="/" target="_blank"><span>QQ号</span>506166445</a></li>
+      </ul>
+    </div>
+  </aside>
+</article>
+<footer>
+  <p>Design by <a href="#" target="_blank">博客</a> <a href="/"></a></p>
+</footer>
+<a href="#" class="cd-top">Top</a>
+</body>
+<!-- jQuery -->
+<script src="/ljw/background/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/ljw/background/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/ljw/background/dist/js/adminlte.min.js"></script>
+<!--markdown-->
+<script src="/ljw/markdown/dist/simplemde.min.js"></script>
+<script th:inline="javascript">
+    $(function() {
+        var  simplemde = new SimpleMDE();
+        var html = simplemde.markdown([[${article.content}]]);
+        $("#contentDiv").html(html);
+        console.log(html);
+        simplemde.toTextArea();
+        simplemde = null;
+    });
+</script>
+</html>

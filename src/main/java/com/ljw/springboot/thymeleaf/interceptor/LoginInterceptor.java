@@ -23,13 +23,10 @@ public class LoginInterceptor implements HandlerInterceptor{
         }else {
             //不符合条件的给出提示信息，并转发到登录页面
             request.setAttribute("msg", "您还没有登录，请先登录！");
+            request.setAttribute("errorCode", "1001");
             request.getRequestDispatcher("/blog/error").forward(request, response);
             return false;
         }
-
-
-
-
     }
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            @Nullable ModelAndView modelAndView) throws Exception {
