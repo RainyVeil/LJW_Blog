@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Bootstrap 模板</title>
+    <meta charset="UTF-8">
+    <!-- 引入 Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/ljw/bootstrap/css/bootstrap.css">
+
+    <!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
+    <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+    <script th:src="@{/jquery/jquery-3.2.1.min.js}"></script>
+    <!-- 包括所有已编译的插件 -->
+    <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row" >
+
+
+        <div class="col-xs-6 col-sm-6"
+             style="box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+            <!--Bootstrap 网格系统-->
+            <h1 class="text-center">Bootstrap 网格系统</h1>
+            <p class="lead">Bootstrap 包含了一个响应式的、移动设备优先的、不固定的网格系统，可以随着设备或视口大小的增加而适当地扩展到 12 列。它包含了用于简单的布局选项的预定义类，也包含了用于生成更多语义布局的功能强大的混合类。</p>
+        </div>
+
+        <div class="col-xs-6 col-sm-6"
+             style="box-shadow:
+         inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+            <p>网格系统通过一系列包含内容的行和列来创建页面布局。下面列出了 Bootstrap 网格系统是如何工作的：
+            </p>
+
+            <p>行必须放置在 .container class 内，以便获得适当的对齐（alignment）和内边距（padding）。
+            </p>
+            <p>使用行来创建列的水平组。
+            </p>
+            <p>内容应该放置在列内，且唯有列可以是行的直接子元素。
+            </p>
+            <p>预定义的网格类，比如 .row 和 .col-xs-4，可用于快速创建网格布局。LESS 混合类可用于更多语义布局。
+            </p>
+            <p>列通过内边距（padding）来创建列内容之间的间隙。该内边距是通过 .rows 上的外边距（margin）取负，表示第一列和最后一列的行偏移。
+            </p>
+            <p>列通过内边距（padding）来创建列内容之间的间隙。该内边距是通过 .rows 上的外边距（margin）取负，表示第一列和最后一列的行偏移。
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="row" >
+        <div class="col-xs-6 col-sm-6"
+                     style="
+         box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+        <h1 class="text-center">Bootstrap 排版</h1>
+        <p class="lead">Bootstrap 使用 Helvetica Neue、 Helvetica、 Arial 和 sans-serif 作为其默认的字体栈。
+
+            使用 Bootstrap 的排版特性，您可以创建标题、段落、列表及其他内联元素。</p>
+
+        <h1>我是标题1 h1. <small>我是副标题1 h1</small></h1>
+        <h2>我是标题2 h2. <small>我是副标题2 h2</small></h2>
+        <h3>我是标题3 h3. <small>我是副标题3 h3</small></h3>
+        <h4>我是标题4 h4. <small>我是副标题4 h4</small></h4>
+        <h5>我是标题5 h5. <small>我是副标题5 h5</small></h5>
+        <h6>我是标题6 h6. <small>我是副标题6 h6</small></h6>
+    </div>
+        <div class="col-xs-6 col-sm-6"
+             style="
+         box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+            <small>本行内容是在标签内</small><br>
+            <strong>本行内容是在标签内</strong><br>
+            <em>本行内容是在标签内，并呈现为斜体</em><br>
+            <p class="text-left">向左对齐文本</p>
+            <p class="text-center">居中对齐文本</p>
+            <p class="text-right">向右对齐文本</p>
+            <p class="text-muted">本行内容是减弱的</p>
+            <p class="text-primary">本行内容带有一个 primary class</p>
+            <p class="text-success">本行内容带有一个 success class</p>
+            <p class="text-info">本行内容带有一个 info class</p>
+            <p class="text-warning">本行内容带有一个 warning class</p>
+            <p class="text-danger">本行内容带有一个 danger class</p>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-xs-6 col-sm-6"
+             style="
+         box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+           <h1 class="text-center">Bootstrap 表格</h1>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>城市</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Tanmay</td>
+                    <td>Bangalore</td>
+                </tr>
+                <tr>
+                    <td>Sachin</td>
+                    <td>Mumbai</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-6 col-sm-6"
+             style="
+         box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+
+        </div>
+        <div class="row" >
+
+
+
+            <div class="col-xs-6 col-sm-6"
+                 style="box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+                <h1 class="text-center">Bootstrap按钮</h1>
+                <!-- 标准的按钮 -->
+                <button type="button" class="btn btn-default">默认按钮</button>
+                <!-- 提供额外的视觉效果，标识一组按钮中的原始动作 -->
+                <button type="button" class="btn btn-primary">原始按钮</button>
+                <!-- 表示一个成功的或积极的动作 -->
+                <button type="button" class="btn btn-success">成功按钮</button>
+                <!-- 信息警告消息的上下文按钮 -->
+                <button type="button" class="btn btn-info">信息按钮</button>
+                <!-- 表示应谨慎采取的动作 -->
+                <button type="button" class="btn btn-warning">警告按钮</button>
+                <!-- 表示一个危险的或潜在的负面动作 -->
+                <button type="button" class="btn btn-danger">危险按钮</button>
+                <!-- 并不强调是一个按钮，看起来像一个链接，但同时保持按钮的行为 -->
+                <button type="button" class="btn btn-link">链接按钮</button>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+</div>
+</body>
+</html>

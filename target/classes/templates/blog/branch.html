@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+<title th:text="${typeMessage.name}" >blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入 Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/ljw/bootstrap/css/bootstrap.css">
+
+    <!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
+    <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+    <script th:src="@{/jquery/jquery-3.2.1.min.js}"></script>
+    <!-- 包括所有已编译的插件 -->
+    <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+
+    <link rel="stylesheet" type="text/css" href="/ljw/blog/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/ljw/blog/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/ljw/blog/css/m.css">
+
+    <script th:src="@{/blog/js/jquery.easyfader.min.js}"></script>
+    <script th:src="@{/blog/js/scrollReveal.js}"></script>
+    <script th:src="@{/blog/js/common.js}"></script>
+    <!--[if lt IE 9]>
+    <script th:src="@{/blog/js/modernizr.js}"></script>
+    <![endif]-->
+
+    <!-- jQuery -->
+    <script src="/ljw/background/plugins/jquery/jquery.min.js"></script>
+
+
+
+</head>
+<body>
+<header>
+  <div class="menu">
+    <nav class="nav" >
+      <h1 class="logo"><a href="#">博客</a></h1>
+      <li><a href="/ljw/blog/index">网站首页</a></li>
+      <li><a  href="/ljw/blog/about">关于我</a></li>
+      <li><a id="nav2" href="/ljw/blog/branch/2">学无止境</a></li>
+      <li><a id="nav1" href="/ljw/blog/branch/1">游戏人生</a></li>
+      <li><a id="nav3" href="/ljw/blog/branch/3">慢生活</a></li>
+    </nav>
+  </div>
+
+    <div id="mnav">
+        <h2><a href="#" class="mlogo">博客</a><span class="navicon"></span></h2>
+        <dl class="list_dl">
+            <dt class="list_dt"><a href="/ljw/blog/index">网站首页</a></dt>
+            <dt class="list_dt"><a href="/ljw/blog/about">关于我</a></dt>
+            <dt class="list_dt"><a href="/ljw/blog/branch/2">学无止境</a></dt>
+            <dt class="list_dt"><a href="/ljw/blog/branch/1">游戏人生</a></dt>
+            <dt class="list_dt"><a href="/ljw/blog/branch/3">慢生活</a></dt>
+        </dl>
+    </div>
+
+</header>
+<div class="pagebg sh"></div>
+<div class="container">
+  <h1 class="t_nav"><span th:text="${typeMessage.message}" ></span><a href="/ljw/blog/index" class="n1">网站首页</a><a th:href="'/ljw/blog/branch/'+${typeMessage.typeId}" class="n2" th:text="${typeMessage.name}">--</a></h1>
+  <!--blogsbox begin-->
+ <div class="blogsbox">
+
+    <div th:each="article : ${topArticles}">
+      <div th:if="${article.display_type} == 1"   class="blogs" data-scroll-reveal="enter bottom over 1s" >
+        <h3 class="blogtitle"><a   th:href="@{'/blog/showContent/'+${article.a_id}}"  th:text="${article.titlename}" >标题1</a></h3>
+        <span class="bplist">
+                        <a th:href="@{'/blog/showContent/'+${article.a_id}}" title="">
+                      <li><img  th:src="${article.picture1}" alt=""></li>
+                      <li><img  th:src="${article.picture2}" alt=""></li>
+                      <li><img  th:src="${article.picture3}" alt=""></li>
+                      </a></span>
+        <p class="blogtext" th:text="${article.brief_intro}"   >简介1</p>
+        <div  class="bloginfo">
+          <ul>
+            <li class="lmname"><a href="/" th:text="${article.typename}"></a></li>
+            <li class="timer" th:text="${article.datetime}" >-</li>
+            <li class="view" th:text="${article.readtimes}" >-</li>
+            <li class="like" th:text="${article.collecttimes}" >-</li>
+          </ul>
+        </div>
+      </div>
+      <div th:if="${article.display_type} == 2"  class="blogs" data-scroll-reveal="enter bottom over 1s" >
+        <h3 class="blogtitle"><a  th:href="@{'/blog/showContent/'+${article.a_id}}"   th:text="${article.titlename}" >标题2</a></h3>
+        <span class="blogpic"><a th:href="@{'/blog/showContent/'+${article.a_id}}" title=""><img   th:src="${article.picture4}" alt=""></a></span>
+        <p class="blogtext" th:text="${article.brief_intro}" >简介2</p>
+        <div  class="bloginfo"  >
+          <ul>
+            <li class="lmname"><a href="/" th:text="${article.typename}"></a></li>
+            <li class="timer" th:text="${article.datetime}" >-</li>
+            <li class="view" th:text="${article.readtimes}" >-</li>
+            <li class="like" th:text="${article.collecttimes}" >-</li>
+          </ul>
+        </div>
+      </div>
+      <div  th:if="${article.display_type} == 3" class="blogs" data-scroll-reveal="enter bottom over 1s" >
+        <h3 class="blogtitle"><a  th:href="@{'/blog/showContent/'+${article.a_id}}"  th:text="${article.titlename}" >标题3</a></h3>
+        <p class="blogtext" th:text="${article.brief_intro}">简介3</p>
+        <div class="bloginfo" >
+          <ul>
+            <li class="lmname"><a href="/" th:text="${article.typename}"></a></li>
+            <li class="timer" th:text="${article.datetime}" >-</li>
+            <li class="view" th:text="${article.readtimes}" >-</li>
+            <li class="like" th:text="${article.collecttimes}" >-</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="pagelist"><a title="总文章数">&nbsp;<b th:text="${total}">45</b></a>
+      &nbsp;&nbsp;&nbsp;
+      <a th:text="${pageNum}+'&nbsp;'" th:each="pageNum : ${pageNums}" th:href="@{'/blog/branch/'+${typeId}+'/'+${pageNum}}"></a>
+      <a th:href="@{'/blog/branch/'+${typeId}+'/'+${nextpage}}">下一页</a>&nbsp;
+      <a th:href="@{'/blog/branch/'+${typeId}+'/'+${lastPage}}">尾页</a>
+    </div>
+  </div>
+  <!--blogsbox end-->
+  <div class="sidebar">
+    <div class="zhuanti">
+      <h2 class="hometitle">特别推荐</h2>
+
+      <ul th:each="specPush : ${specPushArticles}"   >
+        <h4 th:text="${specPush.titlename}"></h4>
+        <li><i><img th:src="${specPush.pic}"></i>
+          <p><span><a th:href="@{'/blog/showContent/'+${specPush.a_id}}">阅读</a></span></p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="tuijian">
+      <h2 class="hometitle">推荐文章</h2>
+
+      <span th:each="push,stat : ${pushArticles}" >
+
+                <ul th:if="${stat.count} == 1" class="tjpic">
+                       <i><img th:src="${push.pic}"></i>
+                            <p ><a th:text="${push.titlename}" th:href="@{'/blog/showContent/'+${push.a_id}}" >-</a></p>
+                </ul>
+
+
+                <ul th:if="${stat.count} != 1"   class="sidenews">
+                        <li>
+                            <i th:if="${push.pic} != 'false'"><img th:src="${push.pic}"></i>
+                            <p ><a th:text="${push.titlename}" th:href="@{'/blog/showContent/'+${push.a_id}}">-</a></p>
+                            <span  th:text="${#dates.format(push.pushdate, 'yyyy-MM-dd')}" >2000-01-01</span>
+                        </li>
+                </ul>
+
+        </span>
+    </div>
+
+
+
+    
+    <div class="guanzhu" id="follow-us">
+      <h2 class="hometitle">关注我</h2>
+      <ul>
+        <li class="qq"><a href="/" target="_blank"><span>QQ号</span>506166445</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<footer>
+  <p>Design by <a href="#" target="_blank">个人博客</a></p>
+</footer>
+<a href="#" class="cd-top">Top</a>
+
+</body>
+<script th:inline="javascript">
+  $(function() {
+        var typeMessage = [[${typeMessage}]];
+        if(typeMessage.typeId == null || (typeMessage.typeId == "")) return;
+        $("#nav"+typeMessage.typeId).css("color","#00A7EB");
+    });
+</script>
+</html>

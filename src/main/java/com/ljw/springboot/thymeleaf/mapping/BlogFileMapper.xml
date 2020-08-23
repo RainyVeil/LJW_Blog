@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljw.springboot.thymeleaf.mapper.BlogFileMapper">
+  <resultMap id="BaseResultMap" type="com.ljw.springboot.thymeleaf.model.BlogFile">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="filename" jdbcType="VARCHAR" property="filename" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
+    <result column="suffix" jdbcType="VARCHAR" property="suffix" />
+    <result column="size" jdbcType="VARCHAR" property="size" />
+    <result column="adddate" jdbcType="TIMESTAMP" property="adddate" />
+    <result column="purpose" jdbcType="VARCHAR" property="purpose" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, filename, address, type, info, suffix, size, adddate, purpose
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.ljw.springboot.thymeleaf.model.BlogFileKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from file
+    where id = #{id,jdbcType=INTEGER}
+      and filename = #{filename,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ljw.springboot.thymeleaf.model.BlogFileKey">
+    delete from file
+    where id = #{id,jdbcType=INTEGER}
+      and filename = #{filename,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ljw.springboot.thymeleaf.model.BlogFile">
+    insert into file (id, filename, address, 
+      type, info, suffix, 
+      size, adddate, purpose
+      )
+    values (#{id,jdbcType=INTEGER}, #{filename,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR}, #{suffix,jdbcType=VARCHAR}, 
+      #{size,jdbcType=VARCHAR}, #{adddate,jdbcType=TIMESTAMP}, #{purpose,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ljw.springboot.thymeleaf.model.BlogFile">
+    insert into file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="filename != null">
+        filename,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="info != null">
+        info,
+      </if>
+      <if test="suffix != null">
+        suffix,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="adddate != null">
+        adddate,
+      </if>
+      <if test="purpose != null">
+        purpose,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="filename != null">
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null">
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="suffix != null">
+        #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null">
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purpose != null">
+        #{purpose,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ljw.springboot.thymeleaf.model.BlogFile">
+    update file
+    <set>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null">
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="suffix != null">
+        suffix = #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null">
+        adddate = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purpose != null">
+        purpose = #{purpose,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and filename = #{filename,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ljw.springboot.thymeleaf.model.BlogFile">
+    update file
+    set address = #{address,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      info = #{info,jdbcType=VARCHAR},
+      suffix = #{suffix,jdbcType=VARCHAR},
+      size = #{size,jdbcType=VARCHAR},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
+      purpose = #{purpose,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+      and filename = #{filename,jdbcType=VARCHAR}
+  </update>
+
+  <select id="queryAllPicture" parameterType="com.ljw.springboot.thymeleaf.model.BlogFile" resultType="java.util.Map">
+    select
+    id, filename, address, type, IFNULL(info,'none') as info, suffix,  IFNULL(size,'0') as size, DATE_FORMAT(adddate, '%Y-%m-%d') AS adddate, purpose,
+    IFNULL( CONCAT(  (select value from config where name = 'picaddress'),filename) ,'false')   as pic
+    from file
+    where 1 = 1
+    <if test="id != null">
+     and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="filename != null">
+      and filename = #{filename,jdbcType=VARCHAR}
+    </if>
+
+  </select>
+
+
+</mapper>
